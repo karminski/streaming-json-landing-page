@@ -40,4 +40,20 @@ streaming-json
 @ <span id="currentYear"></span> <a href="https://github.com/karminski" target="_blank" rel="noopener noreferrer" class="underline">karminski</a> | Made with <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="underline">Astro</a> | Theme <a href="https://github.com/manulthanura/Positivus" target="_blank" rel="noopener noreferrer" class="underline">Positivus</a> </div> </div> </div> </div>  </div> </footer> <script>
     const year = new Date().getFullYear();
     document.getElementById("currentYear").innerHTML = `${year}`;
-</script> </body></html>
+</script> 
+<script src="/js/streaming-json.js"></script>
+<script>
+  const jsonfragment = document.getElementById('jsonfragment');
+  const compltedjson = document.getElementById('compltedjson');
+  jsonfragment.focus();
+  jsonfragment.setSelectionRange(jsonfragment.value.length, jsonfragment.value.length);
+  lexer = new window['streaming-json'].Lexer();
+  lexer.AppendString(jsonfragment.value);
+  compltedjson.textContent = lexer.CompleteJSON();
+  jsonfragment.addEventListener('input', function () {
+    lexer = new window['streaming-json'].Lexer();
+    lexer.AppendString(jsonfragment.value);
+    compltedjson.textContent = lexer.CompleteJSON();
+  });
+</script>
+</body></html>
